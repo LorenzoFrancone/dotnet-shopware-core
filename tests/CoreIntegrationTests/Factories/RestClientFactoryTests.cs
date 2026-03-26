@@ -53,13 +53,18 @@ namespace Compori.Shopware.Factories
             {
                 var sut = new RestClientFactory();
                 Assert.Throws<ArgumentNullException>(() => sut.Create(null));
-                var client = sut.Create(this.TestContext.GetSettings());
+                var settings = this.TestContext.GetSettings();
+                settings.Timeout = TimeSpan.FromSeconds(42);
+
+                var client = sut.Create(settings);
                 Assert.NotNull(client);
+                Assert.Equal(settings.Timeout, client.Options.Timeout);
                 Assert.Null(client.Options.Authenticator);
 
                 sut = new RestClientFactory();
-                client = sut.Create(this.TestContext.GetSettings(), "TOKEN");
+                client = sut.Create(settings, "TOKEN");
                 Assert.NotNull(client);
+                Assert.Equal(settings.Timeout, client.Options.Timeout);
                 var authenticator = client.Options.Authenticator as OAuth2AuthorizationRequestHeaderAuthenticator;
                 Assert.NotNull(authenticator);
             }
