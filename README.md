@@ -2,6 +2,11 @@
 
 Shopware 6 API Client
 
+## Compatibility
+
+This library has been updated to support modern RestSharp versions (>= 113.x),
+fixing runtime issues caused by deprecated APIs.
+
 # Build
 
 ## Cake installieren oder aktualisieren
