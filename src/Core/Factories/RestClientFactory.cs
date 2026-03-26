@@ -2,7 +2,6 @@
 using RestSharp;
 using RestSharp.Authenticators.OAuth2;
 using RestSharp.Serializers.NewtonsoftJson;
-using System;
 using System.Net;
 
 namespace Compori.Shopware.Factories
@@ -115,7 +114,7 @@ namespace Compori.Shopware.Factories
             // Neuen Rest Client erstellen
             var options = new RestClientOptions(settings.Url)
             {
-                MaxTimeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds),
+                Timeout = settings.Timeout,
                 UserAgent = settings.ClientAgent,
                 Authenticator = authenticator                
             };
